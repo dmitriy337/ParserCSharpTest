@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Collections;
+using System.Linq;
 using Parser.Models;
 using HtmlAgilityPack;
 
@@ -33,7 +35,7 @@ namespace Parser
 
                 string xpathForUrls = "//a/@href";
 
-                string[] NotAllowToParse = { ".jpg", ".png", ".jpeg", ".webp" };
+                List<string> NotAllowToParse = new List<string> { ".jpg", ".png", ".jpeg", ".webp" };
 
                 HtmlDocument doc = new HtmlDocument();
                 doc.LoadHtml(data);
@@ -49,7 +51,7 @@ namespace Parser
                     if (ElemUrl.Contains("#comment")) { continue; }
 
                     // CheckFormat 
-                    if (ElemUrl.Contains(domain)) { continue; }
+                    if (NotAllowToParse.Any(u => ElemUrl.Contains(u))) { continue; }
 
 
                     if (PassedUrls.Contains(ElemUrl))
