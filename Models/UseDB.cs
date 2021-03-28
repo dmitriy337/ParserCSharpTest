@@ -22,21 +22,23 @@ namespace Parser.Models
             }
         }
 
-        public void WriteToDB(string url, string image, string discriptoin, string[] screenshots, string urlToDownload )
+        public void WriteToDB(string url,  string title, string image, string discriptoin, string[] screenshots, string urlToDownload )
         {
             try
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-
-                    db.Games.Add(new Game
+                    Game game = new Game
                     {
                         Url = url,
+                        Title = title,
                         Image = image,
                         Discription = discriptoin,
                         Screenshots = screenshots,
                         UrlToDownload = urlToDownload
-                    });
+                    };
+
+                    db.Games.Add(game) ;
                 }
             }
             catch

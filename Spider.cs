@@ -15,43 +15,78 @@ namespace Parser
         private string domain = "s1.torrents-igruha.org";
         
         private string startUrl = "https://s1.torrents-igruha.org/newgames/page/";
-        
-        private WebClient Client = new WebClient();
 
+        private WebClient Client = new WebClient {Encoding = System.Text.Encoding.UTF8 };
+        
+        
         public void StartCrawl()
         {
-            string data  = Client.DownloadString(startUrl);
-            FindUrlsOnPage(data);
+            
+            FindUrlsOnPage(startUrl);
         }
 
-        private void FindUrlsOnPage(string data)
+        private void FindUrlsOnPage(string url)
         {
-            string xpathForUrls = "//a/@href";
-
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(data);
-            HtmlNodeCollection Tags =  doc.DocumentNode.SelectNodes(xpathForUrls);
-            foreach (var elem in Tags)
+            try
             {
-                string ElemUrl = elem.Attributes["href"].Value;
-                
-                //Chech for unique urls
-                if (PassedUrls.Contains(ElemUrl))
+                string data = Client.DownloadString(url);
+
+                string xpathForUrls = "//a/@href";
+
+                string[] NotAllowToParse = { ".jpg", ".png", ".jpeg", ".webp" };
+
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(data);
+                HtmlNodeCollection Tags = doc.DocumentNode.SelectNodes(xpathForUrls);
+
+                foreach (var elem in Tags)
                 {
-                    continue;
+                    string ElemUrl = elem.Attributes["href"].Value;
+
+                    // CheckDomain
+                    if (ElemUrl.Contains(domain) != true ^ ElemUrl.Contains(".jpg")) { continue; }
+
+                    if (PassedUrls.Contains(ElemUrl))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        PassedUrls.Add(ElemUrl);
+                        if (ElemUrl.Contains(".html"))
+                        {
+                            ParseGame(ElemUrl);
+                            FindUrlsOnPage(ElemUrl);
+                        }
+                        else
+                        {
+                            FindUrlsOnPage(ElemUrl);
+                        }
+
+                    }
+                    //Console.WriteLine();
                 }
-                else
-                {
-                    PassedUrls.Add(ElemUrl);
-                    Console.WriteLine(ElemUrl);
-                }
-                //Console.WriteLine();
+            }
+            catch
+            {
+                Console.WriteLine("Ошииибка!!!!!!!!!!!!!!!!!");
             }
             
         } 
-        private void FindGamesOnPage()
+        private void ParseGame(string url)
         {
-            
+            Console.WriteLine(url);
+            string TitleXpath = "//*[@id=\"dle - content\"]/div[1]/h1";
+
+
+
+            //HtmlDocument doc = new HtmlDocument();
+            //doc.LoadHtml(data);
+            //HtmlNodeCollection Tags = doc.DocumentNode.SelectNodes(GameXpath);
+            //foreach (var element in Tags)
+            //{
+            //    Console.WriteLine(element.);
+            //}
         }
         
         
