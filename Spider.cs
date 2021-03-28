@@ -39,7 +39,7 @@ namespace Parser
                 doc.LoadHtml(data);
                 HtmlNodeCollection Tags = doc.DocumentNode.SelectNodes(xpathForUrls);
 
-                foreach (var elem in Tags)
+                foreach (var elem in Tags) 
                 {
                     string ElemUrl = elem.Attributes["href"].Value;
 
