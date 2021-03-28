@@ -44,7 +44,7 @@ namespace Parser
                     string ElemUrl = elem.Attributes["href"].Value;
 
                     // CheckDomain
-                    if (ElemUrl.Contains(domain) != true ^ ElemUrl.Contains(".jpg")) { continue; }
+                    if (ElemUrl.Contains(domain) != true ^ ElemUrl.EndsWisth("/") != true) { continue; }
 
                     if (PassedUrls.Contains(ElemUrl))
                     {
