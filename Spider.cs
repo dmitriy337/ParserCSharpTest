@@ -58,7 +58,6 @@ namespace Parser
                         if (ElemUrl.Contains(domain) != true) { continue; }
                         // CheckComment
                         if (ElemUrl.Contains("#comment")) { continue; }
-
                         // CheckFormat 
                         if (NotAllowToParse.Any(u => ElemUrl.Contains(u))) { continue; }
 
