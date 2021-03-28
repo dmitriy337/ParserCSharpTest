@@ -9,7 +9,13 @@
 *.user
 *.userosscache
 *.sln.docstates
-
+bin/
+obj/
+/packages/
+.vs/
+.idea/
+riderModule.iml
+/_ReSharper.Caches/
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
