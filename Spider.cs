@@ -35,7 +35,7 @@ namespace Parser
 
                 string xpathForUrls = "//a/@href";
 
-                List<string> NotAllowToParse = new List<string> { ".jpg", ".png", ".jpeg", ".webp" };
+                List<string> NotAllowToParse = new List<string> { ".jpg", ".png", ".jpeg", ".webp", "download.php" };
 
                 HtmlDocument doc = new HtmlDocument();
                 doc.LoadHtml(data);

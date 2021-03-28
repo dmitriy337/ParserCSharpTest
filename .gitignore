@@ -21,7 +21,7 @@ riderModule.iml
 
 # Mono auto generated files
 mono_crash.*
-
+cmd.exe
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
