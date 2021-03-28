@@ -23,10 +23,11 @@ namespace Parser
 
         private void FindUrlsOnPage(string data)
         {
-            string xpathForUrls = "a";
+            string xpathForUrls = "//a/@href";
+
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(data);
-            HtmlNodeCollection Tags =  doc.DocumentNode.SelectNodes("//a/@href");
+            HtmlNodeCollection Tags =  doc.DocumentNode.SelectNodes(xpathForUrls);
             foreach (var elem in Tags)
             {
                 Console.WriteLine(elem.Attributes["href"].Value );
