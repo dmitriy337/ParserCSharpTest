@@ -8,10 +8,6 @@ namespace Parser
     {
         static void Main(string[] args)
         {
-
-            //TestCommentFromDmtr
-            //HElloWorld
-
             Spider spider = new Spider();
             spider.StartCrawl();
             

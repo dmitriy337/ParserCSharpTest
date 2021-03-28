@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Parser.Models
 {
@@ -10,6 +11,8 @@ namespace Parser.Models
         public string Image { get; set; }
         public string Discription { get; set; }
         public string[] Screenshots { get; set; }
+        public string Trailer { get; set; }
         public string UrlToDownload { get; set; }
+        
     }
 }
