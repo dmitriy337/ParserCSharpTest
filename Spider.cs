@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using Parser.Models;
 using HtmlAgilityPack;
@@ -9,6 +10,8 @@ namespace Parser
 {
     public class Spider
     {
+        private HashSet<string> PassedUrls = new HashSet<string>();
+        
         private string domain = "s1.torrents-igruha.org";
         
         private string startUrl = "https://s1.torrents-igruha.org/newgames/page/";
@@ -30,7 +33,19 @@ namespace Parser
             HtmlNodeCollection Tags =  doc.DocumentNode.SelectNodes(xpathForUrls);
             foreach (var elem in Tags)
             {
-                Console.WriteLine(elem.Attributes["href"].Value );
+                string ElemUrl = elem.Attributes["href"].Value;
+                
+                //Chech for unique urls
+                if (PassedUrls.Contains(ElemUrl))
+                {
+                    continue;
+                }
+                else
+                {
+                    PassedUrls.Add(ElemUrl);
+                    Console.WriteLine(ElemUrl);
+                }
+                //Console.WriteLine();
             }
             
         } 
