@@ -45,14 +45,6 @@ namespace Parser
                 {
                     string ElemUrl = elem.Attributes["href"].Value;
 
-                    // CheckDomain
-                    if (ElemUrl.Contains(domain) != true) { continue; }
-                    // CheckComment
-                    if (ElemUrl.Contains("#comment")) { continue; }
-
-                    // CheckFormat 
-                    if (NotAllowToParse.Any(u => ElemUrl.Contains(u))) { continue; }
-
 
                     if (PassedUrls.Contains(ElemUrl))
                     {
@@ -61,6 +53,15 @@ namespace Parser
                     else
                     {
                         PassedUrls.Add(ElemUrl);
+
+                        // CheckDomain
+                        if (ElemUrl.Contains(domain) != true) { continue; }
+                        // CheckComment
+                        if (ElemUrl.Contains("#comment")) { continue; }
+
+                        // CheckFormat 
+                        if (NotAllowToParse.Any(u => ElemUrl.Contains(u))) { continue; }
+
                         if (ElemUrl.Contains(".html"))
                         {
                             ParseGame(ElemUrl);
