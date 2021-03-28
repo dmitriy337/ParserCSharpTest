@@ -5,6 +5,7 @@ using System.Collections;
 using System.Linq;
 using Parser.Models;
 using HtmlAgilityPack;
+using System.Threading.Tasks;
 
 
 
@@ -64,11 +65,15 @@ namespace Parser
                         if (ElemUrl.Contains(".html"))
                         {
                             ParseGame(ElemUrl);
-                            FindUrlsOnPage(ElemUrl);
+                            Task task = new Task(() => FindUrlsOnPage(ElemUrl));
+                            //FindUrlsOnPage(ElemUrl);
+                            task.Start();
+
                         }
                         else
                         {
-                            FindUrlsOnPage(ElemUrl);
+                            Task task = new Task(() => FindUrlsOnPage(ElemUrl));
+                            task.Start();
                         }
 
                     }
