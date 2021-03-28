@@ -19,7 +19,7 @@ namespace Parser
         
         private string startUrl = "https://s1.torrents-igruha.org/newgames/page/";
 
-        private WebClient Client = new WebClient {Encoding = System.Text.Encoding.UTF8 };
+       
         
         
         public void StartCrawl()
@@ -32,11 +32,13 @@ namespace Parser
         {
             try
             {
+                WebClient Client = new WebClient { Encoding = System.Text.Encoding.UTF8 };
+                    //Uri uri = new Uri(url);
                 string data = Client.DownloadString(url);
 
                 string xpathForUrls = "//a/@href";
 
-                List<string> NotAllowToParse = new List<string> { ".jpg", ".png", ".jpeg", ".webp", "download.php" };
+                List<string> NotAllowToParse = new List<string> { ".jpg", ".png", ".jpeg", ".webp", "download.php", "do=register" };
 
                 HtmlDocument doc = new HtmlDocument();
                 doc.LoadHtml(data);
