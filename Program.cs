@@ -10,7 +10,7 @@ namespace Parser
         {
 
             //TestCommentFromDmtr
-            //HEllo
+            //HElloWorld
 
             Spider spider = new Spider();
             spider.StartCrawl();
