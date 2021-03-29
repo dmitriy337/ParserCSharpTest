@@ -21,30 +21,23 @@ namespace Parser.Models
                 optionsBuilder.UseSqlite($"Data Source={System.IO.Directory.GetCurrentDirectory()}\\OurDB.db");
             }
         }
+        private ApplicationContext db = new ApplicationContext();
 
-        public void WriteToDB(string url,  string title, string image, string discriptoin, string[] screenshots, string urlToDownload )
+        public void WriteToDB(string url,  string title, string image, string descriptoin, string screenshots )
         {
-            try
-            {
-                using (ApplicationContext db = new ApplicationContext())
-                {
                     Game game = new Game
                     {
                         Url = url,
                         Title = title,
                         Image = image,
-                        Discription = discriptoin,
-                        Screenshots = screenshots,
-                        UrlToDownload = urlToDownload
+                        Discription = descriptoin,
+                        Screenshots = screenshots
                     };
-
-                    db.Games.Add(game) ;
-                }
-            }
-            catch
-            {
-                Console.WriteLine("Smth wrong!");
-            }
+                    db.Games.Add(game);
+        }
+        public void SaveChanges()
+        {
+            db.SaveChanges();
         }
     }
 }
